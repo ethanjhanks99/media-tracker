@@ -5,6 +5,7 @@ import os
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import GroceryList, Item
+from django.forms.models import model_to_dict
 
 # Load manifest when server launches
 MANIFEST = {}
@@ -26,19 +27,32 @@ def index(req):
 
 
 @login_required
-def create_list(req):
-    body =  json.loads(req.body)
-    # TODO validate data
-    grocery_list = GroceryList(
-        name=body["name"],
-        user=req.user
-    )
-    grocery_list.save()
-    for item_name in body["items"]:
-        item = Item(
-            grocery_list=grocery_list,
-            name=item_name,
-            purchased=False
+def grocery_lists(req):
+    print(req.method)
+    if req.method == "POST":
+        body =  json.loads(req.body)
+        # TODO validate data
+        grocery_list = GroceryList(
+            name=body["name"],
+            user=req.user
         )
-        item.save()
-    return JsonResponse({"success": True})
+        grocery_list.save()
+        for item_name in body["items"]:
+            item = Item(
+                grocery_list=grocery_list,
+                name=item_name,
+                purchased=False
+            )
+            item.save()
+        return JsonResponse({"success": True})
+    else:
+        lists = GroceryList.objects.filter(user=req.user)
+        lists = [model_to_dict(list) for list in lists]
+        print(lists)
+        return JsonResponse({ "groceryLists": lists })
+
+
+@login_required
+def grocery_list(req, id):
+    print(id)
+    return JsonResponse({})

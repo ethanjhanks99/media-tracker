@@ -1,12 +1,14 @@
 import { useState } from "react";
 import cookie from "cookie";
 import { useNavigate } from "react-router";
+import { useApi } from "../../utils/api";
 
 export const NewList = () => {
   const [name, setName] = useState("");
   const [items, setItems] = useState([]);
   const [currentItem, setCurrentItem] = useState("");
   const navigate = useNavigate();
+  const api = useApi();
 
   function addItem() {
     if (!items.includes(currentItem)) {
@@ -21,19 +23,12 @@ export const NewList = () => {
 
   async function saveList(e) {
     e.preventDefault();
-    const {csrftoken} = cookie.parse(document.cookie);
-    const res = await fetch("/grocery_lists/", {
-      method: "post",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFTOKEN": csrftoken
-      }, // include cookies!
-      body: JSON.stringify({
-        name,
-        items
-      })
+
+    await api.post("/grocery_lists/", {
+      name,
+      items
     });
+
     navigate(-1);
   }
 
