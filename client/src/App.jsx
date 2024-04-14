@@ -1,6 +1,18 @@
 import { Outlet } from 'react-router'
+import { useState, useEffect } from 'react';
 
 function App() {
+
+  const [user, setUser] = useState(null);
+
+  async function getUser() {
+    const res = await fetch('/me/', {
+      credentials: "same-origin",
+    });
+    const body = await res.json();
+    setUser(body.user);
+  }
+
   async function logout() {
     const res = await fetch("/registration/logout/", {
       credentials: "same-origin", // include cookies!
@@ -14,10 +26,14 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    getUser();
+  }, [])
+
   return (
     <>
+      <div>hello {user && user.first_name}</div>
       <nav><button onClick={logout}>Logout</button></nav>
-      <Outlet />
     </>
   )
 }
