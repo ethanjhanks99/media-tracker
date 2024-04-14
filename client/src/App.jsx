@@ -1,17 +1,42 @@
 import { Outlet } from 'react-router'
 import { useState, useEffect } from 'react';
+import cookie from 'cookie';
 
 function App() {
 
-  const [user, setUser] = useState(null);
+  const [page, setPage] = useState(1);
+  const [movieList, setMovieList] = useState([]);
+  const [images, setImages] = useState([]);
 
-  async function getUser() {
-    const res = await fetch('/me/', {
+  async function getMovies() {
+
+    const res = await fetch("/random/", {
       credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        "Page": page
+      }
     });
-    const body = await res.json();
-    setUser(body.user);
+
+    const movies = await res.json();
+
+    console.log(movies.movies);
+
+    setMovieList(movies.movies);
   }
+
+  useEffect(() => {
+    getMovies();
+  }, []);
+
+  async function getMovieImages() {
+
+  }
+
+  useEffect(() => {
+    
+
+  }, [movieList])
 
   async function logout() {
     const res = await fetch("/registration/logout/", {
@@ -26,13 +51,20 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    getUser();
-  }, [])
-
   return (
     <>
-      <div>hello {user && user.first_name}</div>
+      <div id='movies'>
+        {movieList && 
+        movieList.map((movie) => {
+          return (
+            <div key={movie.id} className='movies'>
+              {movie.original_title}
+              
+            </div>
+          )
+        })
+        }
+      </div>
       <nav><button onClick={logout}>Logout</button></nav>
     </>
   )
