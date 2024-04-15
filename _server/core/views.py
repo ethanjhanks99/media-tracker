@@ -26,12 +26,9 @@ def index(req):
     return render(req, "core/index.html", context)
 
 @login_required
-def movie_random(req):
+def movie_list(req, page):
     api_key = os.environ.get("TMDB_API_KEY")
-    page = req.headers["Page"]
-    print(page)
     url = f"https://api.themoviedb.org/3/discover/movie?language=en-US&page={page}&api_key={api_key}"
-    print(req.headers)
     response = requests.get(url)
     
     body = json.loads(response.text)

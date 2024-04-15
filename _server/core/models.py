@@ -11,3 +11,5 @@ class Movies(models.Model):
 class Shows(models.Model):
     show_id = models.IntegerField(primary_key=False)
     title = models.TextField()
+    genre_id = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

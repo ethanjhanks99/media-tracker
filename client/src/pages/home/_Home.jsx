@@ -1,22 +1,29 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { useApi } from "../../utils/api"
-import { useGroceryLists } from "../../utils/use_grocery_lists"
+import { useMovieList } from "../../utils/use_movie_list"
 
 export const Home = () => {
-  const [groceryLists, groceryListsLoading] = useGroceryLists();
+
+  const [movieList, nextPage, prevPage, loading, page] = useMovieList();
 
   return (
     <div>
-      <Link to="/grocery_list/new">Create new list</Link>
-      <div>
-        {
-          groceryLists.map(list => (
-            <div key={list.id}>
-              <Link to={`/grocery_list/${list.id}`}>{list.name}</Link>
+      <div id='movies'>
+        {movieList && 
+        movieList.map((movie) => {
+          return (
+            <div key={movie.id} className='movies'>
+              {movie.original_title}
             </div>
-          ))
+          );
+        })
         }
+        <div className="pages">
+          {page>1 && 
+          (<button onClick={prevPage}>Previous</button>)
+          }
+          <button onClick={nextPage}>Next</button>  
+        </div>
       </div>
     </div>
   )
