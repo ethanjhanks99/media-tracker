@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useGameList } from "../../utils/use_game_list";
 import { useMovieList } from "../../utils/use_movie_list"
 import { useShowList } from "../../utils/use_show_list";
 
@@ -7,6 +8,7 @@ export const Home = () => {
 
   const [movieList] = useMovieList();
   const [showList] = useShowList();
+  const [gameList] = useGameList();
 
   return (
     <>
@@ -53,7 +55,7 @@ export const Home = () => {
       <div id="games" className="content">
         <h3>Video Games</h3>
         <div className="list">
-          
+
         </div>
       </div>
     </>

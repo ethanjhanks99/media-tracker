@@ -48,7 +48,7 @@ def show_list(req):
 @login_required
 def game_list(req):
     api_key = os.environ.get("MOBY_API_KEY")
-    url = f"https://api.mobygames.com/v1/games?api_key={api_key}"
+    url = f"https://api.mobygames.com/v1/games?limit=2&api_key={api_key}"
     response = requests.get(url)
 
     body = json.loads(response.text)
