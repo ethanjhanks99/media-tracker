@@ -19,7 +19,10 @@ function App() {
 
   return (
     <>
-      <nav><button onClick={logout}>Logout</button></nav>
+      <nav className='top-bar'>
+        <h3>Media Tracker</h3>
+        <button onClick={logout}>Logout</button>
+      </nav>
       <Outlet />
     </>
   )

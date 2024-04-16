@@ -1,3 +1,48 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+
+body {
+  margin: 0;
+}
+
+button {
+  width: fit-content;
+  height: fit-content;
+}
+
+img {
+  max-width: 175px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+  border: 1px solid maroon;
+  border-radius: 16px;
+  padding: 8px;
+
+}
+
+.list {
+  display: flex;
+}
+
+.movies {
+  display: flex;
+  margin: 0 8px;
+}
+
+.top-bar {
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0 8px;
+  border: 1px solid maroon;
+  background-color: maroon;
+}

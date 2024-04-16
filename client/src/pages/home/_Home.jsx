@@ -4,27 +4,35 @@ import { useMovieList } from "../../utils/use_movie_list"
 
 export const Home = () => {
 
-  const [movieList, nextPage, prevPage, loading, page] = useMovieList();
+  const [movieList, loading] = useMovieList();
+
+  if (loading) return null;
 
   return (
-    <div>
-      <div id='movies'>
-        {movieList && 
-        movieList.map((movie) => {
-          return (
-            <div key={movie.id} className='movies'>
-              {movie.original_title}
-            </div>
-          );
-        })
-        }
-        <div className="pages">
-          {page>1 && 
-          (<button onClick={prevPage}>Previous</button>)
+    <>
+      <div id="movies" className="content">
+        <h3>Movies</h3>
+        <div className="list">
+          {movieList && 
+          movieList.map((movie) => {
+            return (
+              <div key={movie.id} className='movies'>
+                <div>
+                  <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="Movie Poster" />
+                  {movie.title}
+                </div>
+              </div>
+            );
+          })
           }
-          <button onClick={nextPage}>Next</button>  
         </div>
       </div>
-    </div>
+      <div id="shows" className="content">
+
+      </div>
+      <div id="games" className="content">
+
+      </div>
+    </>
   )
 }

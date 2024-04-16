@@ -26,9 +26,9 @@ def index(req):
     return render(req, "core/index.html", context)
 
 @login_required
-def movie_list(req, page):
+def movie_list(req):
     api_key = os.environ.get("TMDB_API_KEY")
-    url = f"https://api.themoviedb.org/3/discover/movie?language=en-US&page={page}&api_key={api_key}"
+    url = f"https://api.themoviedb.org/3/discover/movie?language=en-US&api_key={api_key}"
     response = requests.get(url)
     
     body = json.loads(response.text)
