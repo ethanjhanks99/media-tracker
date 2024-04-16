@@ -28,7 +28,7 @@ def index(req):
 @login_required
 def movie_list(req):
     api_key = os.environ.get("TMDB_API_KEY")
-    url = f"https://api.themoviedb.org/3/discover/movie?language=en-US&api_key={api_key}"
+    url = f"https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&language=en-US&api_key={api_key}"
     response = requests.get(url)
     
     body = json.loads(response.text)
@@ -36,7 +36,23 @@ def movie_list(req):
     return JsonResponse({"movies": body["results"]})
 
 @login_required
-def movie_images(req):
+def show_list(req):
     api_key = os.environ.get("TMDB_API_KEY")
-    url = f"https://api.themoviedb.org/3/movie/{req.movie_id}/images"
+    url = f"https://api.themoviedb.org/3/discover/tv?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key={api_key}"
+    response = requests.get(url)
 
+    body = json.loads(response.text)
+
+    return JsonResponse({"shows": body["results"]})
+
+@login_required
+def game_list(req):
+    api_key = os.environ.get("MOBY_API_KEY")
+    url = f"https://api.mobygames.com/v1/games?api_key={api_key}"
+    response = requests.get(url)
+
+    body = json.loads(response.text)
+
+    print(body)
+
+    return JsonResponse({"games": body})
