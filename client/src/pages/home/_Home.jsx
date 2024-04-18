@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { useGameList } from "../../utils/use_game_list";
-import { useMovieList } from "../../utils/use_movie_list"
-import { useShowList } from "../../utils/use_show_list";
+import { useGameList } from "../../utils/use_game";
+import { useMovieList } from "../../utils/use_movie"
+import { useShowList } from "../../utils/use_show";
 
 export const Home = () => {
 
