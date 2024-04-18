@@ -6,4 +6,5 @@ urlpatterns = [
     path('movie-list/', view=views.movie_list, name="movie-list"),
     path('show-list/', view=views.show_list, name="show-list"),
     path('game-list/', view=views.game_list, name="game-list"),
+    path('movie/<int:id>', view=views.movie, name="movie"),
 ]

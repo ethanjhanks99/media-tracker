@@ -20,12 +20,14 @@ export const Home = () => {
             return (
               (index < 8 &&
               <div key={movie.id} className='movies'>
-                <div>
-                  <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="Movie Poster" />
-                  <div className="name">
-                  {movie.title}
+                <Link to={"/movie/" + movie.id}>
+                  <div>
+                    <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="Movie Poster" />
+                    <div className="name">
+                    {movie.title}
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>)
             );
           })

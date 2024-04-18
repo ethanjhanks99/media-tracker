@@ -55,6 +55,12 @@ def game_list(req):
 
     return JsonResponse({"games": body["results"]})
 
+@login_required
 def movie(req, id):
     api_key = os.environ.get("TMDB_API_KEY")
     url = f"https://api.themoviedb.org/3/movie/{id}?language=en-US&api_key={api_key}"
+    response = requests.get(url)
+
+    body = json.loads(response.text)
+
+    return JsonResponse({"movie": body})

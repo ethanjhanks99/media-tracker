@@ -5,6 +5,7 @@ import './index.css'
 import 'vite/modulepreload-polyfill'
 import {createHashRouter, Link, RouterProvider} from "react-router-dom";
 import { Home } from './pages/home/_Home.jsx'
+import { Movie } from './pages/movie/_Movie.jsx'
 
 
 const router = createHashRouter([
@@ -15,7 +16,11 @@ const router = createHashRouter([
       {
         path: "/",
         element: <Home />
-      }
+      },
+      {
+        path: "/movie/:id",
+        element: <Movie />
+      },
     ]
   }
 ])
