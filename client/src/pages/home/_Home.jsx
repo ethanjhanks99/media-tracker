@@ -55,7 +55,21 @@ export const Home = () => {
       <div id="games" className="content">
         <h3>Video Games</h3>
         <div className="list">
-
+          {gameList && 
+          gameList.map((game, index) => {
+            return (
+              (index < 8 && 
+                <div key={game.id} className="movies">
+                  <div>
+                    <img src={game.background_image} alt="" />
+                    <div className="name">
+                      {game.name}
+                    </div>
+                  </div>
+                </div>)
+            )
+          })
+          }
         </div>
       </div>
     </>

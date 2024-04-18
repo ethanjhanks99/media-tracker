@@ -6,7 +6,7 @@ export const useGameList = () => {
   const [games, setGames] = useState([]);
 
   async function loadGameList() {
-    const gameList = await fetch('/game-list/');
+    const gameList = await api.get('/game-list/');
 
     setGames(gameList.games);
   }

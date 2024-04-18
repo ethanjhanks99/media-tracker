@@ -47,12 +47,10 @@ def show_list(req):
 
 @login_required
 def game_list(req):
-    api_key = os.environ.get("MOBY_API_KEY")
-    url = f"https://api.mobygames.com/v1/games?limit=2&api_key={api_key}"
+    api_key = os.environ.get("RAWG_API_KEY")
+    url = f"https://api.rawg.io/api/games?page=1&page_size=8&key={api_key}"
     response = requests.get(url)
-
+    
     body = json.loads(response.text)
 
-    print(body)
-
-    return JsonResponse({"games": body})
+    return JsonResponse({"games": body["results"]})
