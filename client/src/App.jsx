@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router'
 import { useState, useEffect } from 'react';
 import cookie from 'cookie';
+import { SearchBar } from './SearchBar';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
     <>
       <nav className='top-bar'>
         <h3>Media Tracker</h3>
+        <SearchBar />
         <button onClick={logout}>Logout</button>
       </nav>
       <Outlet />

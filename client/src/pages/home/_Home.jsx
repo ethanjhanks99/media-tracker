@@ -18,7 +18,6 @@ export const Home = () => {
           {movieList && 
           movieList.map((movie, index) => {
             return (
-              (index < 8 &&
               <div key={movie.id} className='movies'>
                 <Link to={"/movie/" + movie.id}>
                   <div>
@@ -28,7 +27,7 @@ export const Home = () => {
                     </div>
                   </div>
                 </Link>
-              </div>)
+              </div>
             );
           })
           }
@@ -40,7 +39,6 @@ export const Home = () => {
           {showList &&
           showList.map((show, index) => {
             return (
-              (index < 8 &&
               <div key={show.id} className='movies'>
                 <div>
                   <img src={"https://image.tmdb.org/t/p/original" + show.poster_path} alt="Show Poster" />
@@ -48,7 +46,7 @@ export const Home = () => {
                     {show.name}
                   </div>
                 </div>
-              </div>)
+              </div>
             )
           })
           }

@@ -29,12 +29,12 @@ img {
 
 .list {
   display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .movies {
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
 }
 
 .top-bar {

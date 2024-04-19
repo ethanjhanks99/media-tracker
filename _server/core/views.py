@@ -64,3 +64,20 @@ def movie(req, id):
     body = json.loads(response.text)
 
     return JsonResponse({"movie": body})
+
+def search(req, query):
+    tmdb_api_key = os.environ.get("TMBD_API_KEY")
+    movie_url = f"https://api.themoviedb.org/3/search/movie?query={query}&api_key={tmdb_api_key}"
+    movie_response = requests.get(movie_url)
+    movie_body = json.loads(movie_response)
+
+    show_url = f"https://api.themoviedb.org/3/search/tv?query={query}&api_key={tmdb_api_key}"
+    show_response = requests.get(show_url)
+    show_body = json.loads(show_response)
+
+    rawg_api_key = os.environ.get("RAWG_API_KEY")
+    game_url = f"https://api.rawg.io/api/games?search{query}&page=1&page_size=20&key={rawg_api_key}"
+    game_response = requests.get(game_url)
+    game_body = json.loads(game_response)
+
+    return JsonResponse({"movies": movie_body, "shows": show_body, "games": game_body})
