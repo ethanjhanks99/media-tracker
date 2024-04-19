@@ -21,17 +21,19 @@ export const useMovieList = () => {
 
 export const useMovie = (id) => {
   const api = useApi();
-  const [movie, setMovie] = useState(null);
+  const [movie, setMovie] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function loadMovie() {
     const movieData = await api.get(`/movie/${id}`);
 
-    setMovie(movieData);
+    setMovie(movieData.movie);
+    setLoading(false);
   }
 
   useEffect(() => {
     loadMovie();
   }, []);
 
-  return [movie]
+  return [movie, loading]
 }
