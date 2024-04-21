@@ -1,5 +1,4 @@
 import cookie from "cookie";
-import { useRef, useState } from "react";
 
 class Api {
   async makeRequest(url, method, body) {
@@ -19,7 +18,7 @@ class Api {
     return res.json();
   }
 
-  get(url, page) {
+  get(url) {
     return this.makeRequest(url, "get");
   }
 

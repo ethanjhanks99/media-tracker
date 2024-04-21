@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router'
 import { useState, useEffect } from 'react';
 import cookie from 'cookie';
-import { SearchBar } from './SearchBar';
+import { SearchBar } from './components/search_bar/_SearchBar';
 
 function App() {
 

@@ -7,5 +7,5 @@ urlpatterns = [
     path('show-list/', view=views.show_list, name="show-list"),
     path('game-list/', view=views.game_list, name="game-list"),
     path('movie/<int:id>', view=views.movie, name="movie"),
-    path('search/<str:query', view=views.search, name="searchj"),
+    path('search/<str:query>', view=views.search, name="search"),
 ]
