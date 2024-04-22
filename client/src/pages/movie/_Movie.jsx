@@ -6,9 +6,7 @@ export const Movie = () => {
   const { id } = useParams();
   const [movieData, loading] = useMovie(id);
 
-  if (loading) {
-    return null;
-  };
+  if (loading) return null;
 
   return (
     <>

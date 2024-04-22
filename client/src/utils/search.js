@@ -5,7 +5,7 @@ export const useSearch = (query) => {
   const api = useApi();
 
   query = query.split(" ");
-  good_query = query[0];
+  let good_query = query[0];
   for (let i = 1; i < query.length; i++) {
     good_query += "+" + query[i];
   }
