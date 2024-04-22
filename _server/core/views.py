@@ -83,3 +83,7 @@ def search(req, query):
     game_body = json.loads(game_response.text)
 
     return JsonResponse({"movies": movie_body, "shows": show_body, "games": game_body})
+
+def save_movie(req, id):
+
+    return
