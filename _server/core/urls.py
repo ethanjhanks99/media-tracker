@@ -8,5 +8,6 @@ urlpatterns = [
     path('game-list/', view=views.game_list, name="game-list"),
     path('movie/<int:id>/', view=views.movie, name="movie"),
     path('save-movie/', view=views.saved_movie, name="save-movie"),
+    path('show/<int:id>/', view=views.show, name="show"),
     path('search/<str:query>/', view=views.search, name="search"),
 ]

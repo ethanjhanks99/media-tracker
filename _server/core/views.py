@@ -67,6 +67,16 @@ def movie(req, id):
     return JsonResponse({"movie": body})
 
 @login_required
+def show(req, id):
+    api_key = os.environ.get("TMDB_API_KEY")
+    url = f"https://api.themoviedb.org/3/tv/{id}?language=en-US&api_key={api_key}"
+    response = requests.get(url)
+
+    body = json.loads(response.text)
+
+    return JsonResponse({"show": body})
+
+@login_required
 def saved_movie(req):
     if req.method == "POST":
         body = json.loads(req.body)
