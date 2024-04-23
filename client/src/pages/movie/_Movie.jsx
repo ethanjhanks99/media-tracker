@@ -1,12 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useMovie } from "../../utils/use_movie";
+import { useApi } from "../../utils/api";
 
 export const Movie = () => {
   const { id } = useParams();
   const [movieData, loading] = useMovie(id);
+  const api = useApi();
 
   if (loading) return null;
+
+  async function save(e) {
+    e.preventDefault();
+
+    api.post("/save-movie/", {
+      movieId: movieData.id,
+      movieTitle: movieData.title,
+      moviePoster: "https://image.tmdb.org/t/p/original" + movieData.poster_path
+    });
+  }
 
   return (
     <>
@@ -41,6 +53,9 @@ export const Movie = () => {
           })}
         </div>
       </div>
+      <form onSubmit={save}>
+        <button type="submit">Save Movie</button>
+      </form>
     </>
   )
 }

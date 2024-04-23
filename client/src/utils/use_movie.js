@@ -25,7 +25,7 @@ export const useMovie = (id) => {
   const [loading, setLoading] = useState(true);
 
   async function loadMovie() {
-    const movieData = await api.get(`/movie/${id}`);
+    const movieData = await api.get(`/movie/${id}/`);
 
     setMovie(movieData.movie);
     setLoading(false);

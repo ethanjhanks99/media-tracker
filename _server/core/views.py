@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 import requests
+from .models import Movies, Shows, Games
 
 # Load manifest when server launches
 MANIFEST = {}
@@ -66,6 +67,21 @@ def movie(req, id):
     return JsonResponse({"movie": body})
 
 @login_required
+def saved_movie(req):
+    if req.method == "POST":
+        body = json.loads(req.body)
+        saved_movie = Movies(
+            id = body["movieId"],
+            title = body["movieTitle"],
+            poster_path = body["moviePoster"]
+        )
+        saved_movie.save()
+
+        saved_movie.user.add(req.user)
+
+        return JsonResponse({"success": True})
+
+@login_required
 def search(req, query):
 
     tmdb_api_key = os.environ.get("TMDB_API_KEY")
@@ -83,7 +99,3 @@ def search(req, query):
     game_body = json.loads(game_response.text)
 
     return JsonResponse({"movies": movie_body, "shows": show_body, "games": game_body})
-
-def save_movie(req, id):
-
-    return
