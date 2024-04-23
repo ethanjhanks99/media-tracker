@@ -11,6 +11,9 @@ export const Show = () => {
   return (
     <>
       <h3>{showData.name}</h3>
+      <div>
+      <img src={`https://image.tmdb.org/t/p/original${showData.poster_path}`} alt="Show Poster" />
+      </div>
     </>
   )
 
