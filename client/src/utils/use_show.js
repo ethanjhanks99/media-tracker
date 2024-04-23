@@ -17,3 +17,23 @@ export const useShowList = () => {
 
   return [shows];
 }
+
+export const useShow = (id) => {
+  const api = useApi();
+  const [show, setShow] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function loadShow() {
+    const showData = await api.get(`/show/${id}/`);
+
+    setShow(showData.show);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    loadShow();
+  }, []);
+
+  return [show, loading];
+
+}

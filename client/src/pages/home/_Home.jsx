@@ -19,7 +19,7 @@ export const Home = () => {
           movieList.map((movie, index) => {
             return (
               <div key={movie.id} className='items'>
-                <Link to={"/movie/" + movie.id}>
+                <Link to={`/movie/${movie.id}/`}>
                   <div>
                     <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="Movie Poster" />
                     <div className="name">
@@ -40,12 +40,14 @@ export const Home = () => {
           showList.map((show, index) => {
             return (
               <div key={show.id} className='movies'>
-                <div>
-                  <img src={"https://image.tmdb.org/t/p/original" + show.poster_path} alt="Show Poster" />
-                  <div className="name">
-                    {show.name}
+                <Link to={`/show/${show.id}/`}>
+                  <div>
+                    <img src={"https://image.tmdb.org/t/p/original" + show.poster_path} alt="Show Poster" />
+                    <div className="name">
+                      {show.name}
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             )
           })
