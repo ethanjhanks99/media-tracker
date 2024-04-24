@@ -12,10 +12,10 @@ export const Movie = () => {
   async function save(e) {
     e.preventDefault();
 
-    api.post("/save-movie/", {
+    api.post(`/movie/${id}/`, {
       movieId: movieData.id,
       movieTitle: movieData.title,
-      moviePoster: "https://image.tmdb.org/t/p/original" + movieData.poster_path
+      moviePoster: `https://image.tmdb.org/t/p/original${movieData.poster_path}`
     });
   }
 
@@ -23,7 +23,7 @@ export const Movie = () => {
     <>
       <h1>{movieData.title}</h1>
       <div>
-        <img src={"https://image.tmdb.org/t/p/original" + movieData.poster_path} alt="" />
+        <img src={`https://image.tmdb.org/t/p/original${movieData.poster_path}`} alt="" />
       </div>
       <div className="information">
         <div className="overview">
@@ -35,15 +35,15 @@ export const Movie = () => {
           {movieData.genres.map((genre) => {
             return (
               <div key={genre.id} className="genre">{genre.name}</div>
-            )
-          })}
+              )
+            })}
         </div>
         <div>
           <h3>Production Companies</h3>
           {movieData.production_companies.map((company) => {
             return (
               <div key={company.id}>
-                <img src={"https://image.tmdb.org/t/p/original" + company.logo_path} alt="" />
+                <img src={`https://image.tmdb.org/t/p/original${company.logo_path}`} alt="" />
                 <div className="name">
                 {company.name}
                 </div>

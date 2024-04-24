@@ -58,36 +58,6 @@ def game_list(req):
 
 @login_required
 def movie(req, id):
-    api_key = os.environ.get("TMDB_API_KEY")
-    url = f"https://api.themoviedb.org/3/movie/{id}?language=en-US&api_key={api_key}"
-    response = requests.get(url)
-
-    body = json.loads(response.text)
-
-    return JsonResponse({"movie": body})
-
-@login_required
-def show(req, id):
-    api_key = os.environ.get("TMDB_API_KEY")
-    url = f"https://api.themoviedb.org/3/tv/{id}?language=en-US&api_key={api_key}"
-    response = requests.get(url)
-
-    body = json.loads(response.text)
-
-    return JsonResponse({"show": body})
-
-@login_required
-def game(req, id):
-    api_key = os.environ.get("RAWG_API_KEY")
-    url = f"https://api.rawg.io/api/games/{id}?key={api_key}"
-    response = requests.get(url)
-
-    body = json.loads(response.text)
-
-    return JsonResponse({"game": body})
-
-@login_required
-def saved_movie(req):
     if req.method == "POST":
         body = json.loads(req.body)
         saved_movie = Movies(
@@ -100,6 +70,60 @@ def saved_movie(req):
         saved_movie.user.add(req.user)
 
         return JsonResponse({"success": True})
+    else:
+        api_key = os.environ.get("TMDB_API_KEY")
+        url = f"https://api.themoviedb.org/3/movie/{id}?language=en-US&api_key={api_key}"
+        response = requests.get(url)
+
+        body = json.loads(response.text)
+
+        return JsonResponse({"movie": body})
+
+@login_required
+def show(req, id):
+    if req.method == "POST":
+        body = json.loads(req.body)
+        saved_show = Shows(
+            id = body["showId"],
+            title = body["showTitle"],
+            poster_path = body["showPoster"]
+        )
+        saved_show.save()
+
+        saved_show.user.add(req.user)
+
+        return JsonResponse({"success": True})
+    else:
+        api_key = os.environ.get("TMDB_API_KEY")
+        url = f"https://api.themoviedb.org/3/tv/{id}?language=en-US&api_key={api_key}"
+        response = requests.get(url)
+
+        body = json.loads(response.text)
+
+        return JsonResponse({"show": body})
+
+@login_required
+def game(req, id):
+    if req.method == "POST":
+        body = json.loads(req.body)
+        saved_movie = Movies(
+            id = body["movieId"],
+            title = body["movieTitle"],
+            poster_path = body["moviePoster"]
+        )
+        saved_movie.save()
+
+        saved_movie.user.add(req.user)
+
+        return JsonResponse({"success": True})
+    else:
+        api_key = os.environ.get("RAWG_API_KEY")
+        url = f"https://api.rawg.io/api/games/{id}?key={api_key}"
+        response = requests.get(url)
+
+        body = json.loads(response.text)
+
+        return JsonResponse({"game": body})
 
 @login_required
 def search(req, query):
