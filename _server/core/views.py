@@ -77,6 +77,16 @@ def show(req, id):
     return JsonResponse({"show": body})
 
 @login_required
+def game(req, id):
+    api_key = os.environ.get("RAWG_API_KEY")
+    url = f"https://api.rawg.io/api/games/{id}?key={api_key}"
+    response = requests.get(url)
+
+    body = json.loads(response.text)
+
+    return JsonResponse({"game": body})
+
+@login_required
 def saved_movie(req):
     if req.method == "POST":
         body = json.loads(req.body)

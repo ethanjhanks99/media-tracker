@@ -17,3 +17,23 @@ export const useGameList = () => {
 
   return [games];
 }
+
+
+export const useGame = (id) => {
+  const api = useApi();
+  const [game, setGame] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  async function loadGame() {
+    const gameData = await api.get(`/game/${id}/`);
+
+    setGame(gameData.game);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    loadGame();
+  }, []);
+
+  return [game, loading];
+}
