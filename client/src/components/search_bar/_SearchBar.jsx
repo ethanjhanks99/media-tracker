@@ -18,7 +18,6 @@ export const SearchBar = () => {
       }
       return newQuery;
     });
-    
   }
 
   return (

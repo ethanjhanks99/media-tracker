@@ -1,24 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useSearch } from "../../utils/search";
 import { Link } from "react-router-dom";
 
 export const Search = () => {
   const { query } = useParams();
-
-  const [searchResults, loading]= useSearch(query);
+  const [searchResults, loading] = useSearch(query);
 
   if (loading) {
     return null;
   }
 
-  console.log(searchResults);
+  
   const movies = searchResults[0].movies.results;
-  console.log(movies);
   const shows = searchResults[1].shows.results;
-  console.log(shows);
   const games = searchResults[2].games.results;
-  console.log(games);
 
   return (
     <div className="search-results">

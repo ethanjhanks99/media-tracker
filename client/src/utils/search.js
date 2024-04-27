@@ -13,8 +13,8 @@ export const useSearch = (query) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function loadResults() {
-    const resultData = await api.get('/search/' + good_query + '/');
+  const loadResults = async () => {
+    const resultData = await api.get(`/search/${good_query}/`);
 
     setResults([{"movies": resultData.movies}, {"shows": resultData.shows}, {"games": resultData.games}]);
     setLoading(false);
