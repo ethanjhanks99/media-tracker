@@ -106,10 +106,10 @@ def show(req, id):
 def game(req, id):
     if req.method == "POST":
         body = json.loads(req.body)
-        saved_movie = Movies(
-            id = body["movieId"],
-            title = body["movieTitle"],
-            poster_path = body["moviePoster"]
+        saved_movie = Games(
+            id = body["gameId"],
+            title = body["gameTitle"],
+            poster_path = body["gamePoster"]
         )
         saved_movie.save()
 
@@ -143,3 +143,21 @@ def search(req, query):
     game_body = json.loads(game_response.text)
 
     return JsonResponse({"movies": movie_body, "shows": show_body, "games": game_body})
+
+@login_required
+def saved(req):
+    movies = Movies.objects.filter(user = req.user)
+    movies = [model_to_dict(movie) for movie in movies]
+    movies = [{key: movie[key] for key in movie if key != 'user'} for movie in movies]
+    
+    shows = Shows.objects.filter(user = req.user)
+    shows = [model_to_dict(show) for show in shows]
+    shows = [{key: show[key] for key in show if key != 'user'} for show in shows]
+
+    games = Games.objects.filter(user = req.user)
+    games = [model_to_dict(game) for game in games]
+    games = [{key: game[key] for key in game if key != 'user'} for game in games]
+
+    username = req.user.username.split("@")[0]
+
+    return JsonResponse({"movies": movies, "shows": shows, "games": games, "username": username})

@@ -18,7 +18,6 @@ export const Movie = () => {
       moviePoster: `https://image.tmdb.org/t/p/original${movieData.poster_path}`
     });
   }
-
   return (
     <>
       <h1>{movieData.title}</h1>

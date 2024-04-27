@@ -9,6 +9,7 @@ import { Movie } from './pages/movie/_Movie.jsx'
 import { Search } from './pages/search/_Search.jsx'
 import { Show } from './pages/show/_Show.jsx'
 import { Game } from './pages/game/_Game.jsx'
+import { Saved } from './pages/saved/_Saved.jsx'
 
 
 const router = createHashRouter([
@@ -35,6 +36,10 @@ const router = createHashRouter([
       {
         path: "/game/:id",
         element: <Game />
+      },
+      {
+        path:"/user",
+        element: <Saved />
       }
     ]
   }
