@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import cookie from 'cookie';
 import { SearchBar } from './components/search_bar/_SearchBar';
 import { Link } from 'react-router-dom';
+import { Sidebar } from './components/sidebar/_Sidebar';
 
 function App() {
 
@@ -19,15 +20,26 @@ function App() {
     }
   }
 
+  const pages = [
+    {"name": "Home", "url": "/"},
+    {"name": "My Saved", "url": "/user/"}
+  ]
+
   return (
     <>
       <nav className='top-bar'>
         <h3>Media Tracker</h3>
         <SearchBar />
-        <Link to={"/user/"}><button>Saved</button></Link>
         <button onClick={logout}>Logout</button>
       </nav>
-      <Outlet />
+      <div className='bottom'>
+        <div className='sticky-sidebar'>
+          <Sidebar pages={pages} />
+        </div>
+        <div className='everything-else'>
+          <Outlet />
+        </div>
+      </div>
     </>
   )
 }
