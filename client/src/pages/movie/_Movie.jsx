@@ -18,6 +18,13 @@ export const Movie = () => {
       moviePoster: `https://image.tmdb.org/t/p/original${movieData.poster_path}`
     });
   }
+
+  const unsave = async (e) => {
+    e.preventDefault();
+
+    api.del(`/movie/${id}/`);
+  }
+
   return (
     <>
       <h1>{movieData.title}</h1>
@@ -54,6 +61,7 @@ export const Movie = () => {
       <form onSubmit={save}>
         <button type="submit">Save Movie</button>
       </form>
+      <button onClick={unsave}>Unsave</button>
     </>
   )
 }

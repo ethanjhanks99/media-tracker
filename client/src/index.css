@@ -25,6 +25,11 @@ img {
   border-radius: 16px;
   padding: 8px;
   align-items: baseline;
+  width: 100%;
+}
+
+.everything-else {
+  width: fit-content;
 }
 
 .list {

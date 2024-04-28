@@ -19,6 +19,12 @@ export const Show = () => {
     });
   }
 
+  const unsave = async (e) => {
+    e.preventDefault();
+
+    api.del(`/show/${id}/`);
+  }
+
   return (
     <>
       <h3>{showData.name}</h3>
@@ -28,6 +34,7 @@ export const Show = () => {
       <form onSubmit={save}>
         <button>Save Show</button>
       </form>
+      <button onClick={unsave}>Unsave</button>
     </>
   )
 

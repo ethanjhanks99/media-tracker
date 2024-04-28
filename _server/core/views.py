@@ -70,6 +70,10 @@ def movie(req, id):
         saved_movie.user.add(req.user)
 
         return JsonResponse({"success": True})
+    elif req.method == "DELETE":
+        movie_data = Movies.objects.filter(id=id, user=req.user)
+        movie_data.delete()
+        return JsonResponse({"success": True})
     else:
         api_key = os.environ.get("TMDB_API_KEY")
         url = f"https://api.themoviedb.org/3/movie/{id}?language=en-US&api_key={api_key}"
@@ -93,6 +97,10 @@ def show(req, id):
         saved_show.user.add(req.user)
 
         return JsonResponse({"success": True})
+    elif req.method == "DELETE":
+        show_data = Shows.objects.filter(id=id, user=req.user)
+        show_data.delete()
+        return JsonResponse({"success": True})
     else:
         api_key = os.environ.get("TMDB_API_KEY")
         url = f"https://api.themoviedb.org/3/tv/{id}?language=en-US&api_key={api_key}"
@@ -115,6 +123,10 @@ def game(req, id):
 
         saved_movie.user.add(req.user)
 
+        return JsonResponse({"success": True})
+    elif req.method == "DELETE":
+        game_data = Games.objects.filter(id=id, user=req.user)
+        game_data.delete()
         return JsonResponse({"success": True})
     else:
         api_key = os.environ.get("RAWG_API_KEY")

@@ -20,10 +20,17 @@ export const Game = () => {
     });
   }
 
+  const unsave = async (e) => {
+    e.preventDefault();
+
+    api.del(`/game/${id}/`)
+  }
+
   return (
     <>
       <h3>{gameData.name}</h3>
       <button onClick={save}>Save Me</button>
+      <button onClick={unsave}>Unsave</button>
     </>
   )
 }
