@@ -14,7 +14,7 @@ export const SearchBar = () => {
     setQuery((newQuery) => {
       newQuery = search[0];
       for (let i = 1; i < search.length; i++) {
-        newQuery += "+" + search[i];
+        newQuery += `+${search[i]}`;
       }
       return newQuery;
     });
