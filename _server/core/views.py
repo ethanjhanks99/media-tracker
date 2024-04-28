@@ -80,8 +80,8 @@ def movie(req, id):
         response = requests.get(url)
 
         body = json.loads(response.text)
-
-        return JsonResponse({"movie": body})
+        
+        return JsonResponse({"movie": body, "saved": Movies.objects.filter(pk=id, user=req.user).exists()})
 
 @login_required
 def show(req, id):
@@ -108,7 +108,7 @@ def show(req, id):
 
         body = json.loads(response.text)
 
-        return JsonResponse({"show": body})
+        return JsonResponse({"show": body, "saved": Shows.objects.filter(id=id, user=req.user).exists()})
 
 @login_required
 def game(req, id):
@@ -123,11 +123,11 @@ def game(req, id):
 
         saved_movie.user.add(req.user)
 
-        return JsonResponse({"success": True})
+        return JsonResponse({"success": True, "saved": True})
     elif req.method == "DELETE":
         game_data = Games.objects.filter(id=id, user=req.user)
         game_data.delete()
-        return JsonResponse({"success": True})
+        return JsonResponse({"success": True, "saved": False})
     else:
         api_key = os.environ.get("RAWG_API_KEY")
         url = f"https://api.rawg.io/api/games/{id}?key={api_key}"
@@ -135,7 +135,7 @@ def game(req, id):
 
         body = json.loads(response.text)
 
-        return JsonResponse({"game": body})
+        return JsonResponse({"game": body, "saved": Games.objects.filter(id=id, user=req.user).exists()})
 
 @login_required
 def search(req, query):

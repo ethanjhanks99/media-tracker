@@ -21,12 +21,14 @@ export const useShowList = () => {
 export const useShow = (id) => {
   const api = useApi();
   const [show, setShow] = useState([]);
+  const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
 
   async function loadShow() {
     const showData = await api.get(`/show/${id}/`);
 
     setShow(showData.show);
+    setSaved(showData.saved);
     setLoading(false);
   }
 
@@ -34,6 +36,6 @@ export const useShow = (id) => {
     loadShow();
   }, []);
 
-  return [show, loading];
+  return [show, saved, loading];
 
 }

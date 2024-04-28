@@ -22,12 +22,14 @@ export const useGameList = () => {
 export const useGame = (id) => {
   const api = useApi();
   const [game, setGame] = useState({});
+  const [saved, setSaved] = useState(false)
   const [loading, setLoading] = useState(true);
 
   async function loadGame() {
     const gameData = await api.get(`/game/${id}/`);
 
     setGame(gameData.game);
+    setSaved(gameData.saved);
     setLoading(false);
   }
 
@@ -35,5 +37,5 @@ export const useGame = (id) => {
     loadGame();
   }, []);
 
-  return [game, loading];
+  return [game, saved, loading];
 }

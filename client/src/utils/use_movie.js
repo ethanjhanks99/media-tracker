@@ -22,12 +22,14 @@ export const useMovieList = () => {
 export const useMovie = (id) => {
   const api = useApi();
   const [movie, setMovie] = useState([]);
+  const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(true);
 
   async function loadMovie() {
     const movieData = await api.get(`/movie/${id}/`);
 
     setMovie(movieData.movie);
+    setSaved(movieData.saved)
     setLoading(false);
   }
 
@@ -35,5 +37,5 @@ export const useMovie = (id) => {
     loadMovie();
   }, []);
 
-  return [movie, loading]
+  return [movie, saved, loading]
 }

@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useApi } from "../../utils/api";
 import { useGame } from "../../utils/use_game";
 
 export const Game = () => {
   const { id } = useParams();
-  const [gameData, loading] = useGame(id);
+  const [gameData, isSaved, loading] = useGame(id);
+  const [saved, setSaved] = useState(isSaved)
   const api = useApi();
+
+  useEffect(() => {
+    setSaved(isSaved);
+  }, [isSaved]);
 
   if (loading) return null;
 
@@ -18,19 +23,21 @@ export const Game = () => {
       gameTitle: gameData.name,
       gamePoster: gameData.background_image
     });
+    setSaved(true);
   }
 
   const unsave = async (e) => {
     e.preventDefault();
 
     api.del(`/game/${id}/`)
+    setSaved(false);
   }
 
   return (
     <>
       <h3>{gameData.name}</h3>
-      <button onClick={save}>Save Me</button>
-      <button onClick={unsave}>Unsave</button>
+      {!saved && <button onClick={save}>Save Me</button>}
+      {saved && <button onClick={unsave}>Unsave</button>}
     </>
   )
 }

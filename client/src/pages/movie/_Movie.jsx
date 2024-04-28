@@ -1,11 +1,17 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useMovie } from "../../utils/use_movie";
 import { useApi } from "../../utils/api";
 
 export const Movie = () => {
   const { id } = useParams();
-  const [movieData, loading] = useMovie(id);
+  const [movieData, isSaved, loading] = useMovie(id);
+  const [saved, setSaved] = useState(isSaved)
   const api = useApi();
+
+  useEffect(() => {
+    setSaved(isSaved)
+  }, [isSaved]);
 
   if (loading) return null;
 
@@ -17,12 +23,14 @@ export const Movie = () => {
       movieTitle: movieData.title,
       moviePoster: `https://image.tmdb.org/t/p/original${movieData.poster_path}`
     });
+    setSaved(true);
   }
 
   const unsave = async (e) => {
     e.preventDefault();
 
     api.del(`/movie/${id}/`);
+    setSaved(false);
   }
 
   return (
@@ -58,10 +66,8 @@ export const Movie = () => {
           })}
         </div>
       </div>
-      <form onSubmit={save}>
-        <button type="submit">Save Movie</button>
-      </form>
-      <button onClick={unsave}>Unsave</button>
+      {!saved && <button onClick={save}>Save Movie</button>}     
+      {saved && <button onClick={unsave}>Unsave</button>}
     </>
   )
 }
