@@ -1,35 +1,47 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useSearch } from "../../utils/search";
 import { Link } from "react-router-dom";
+import { useApi } from "../../utils/api";
 
 export const Search = () => {
   const { query } = useParams();
-  const [searchResults, loading] = useSearch(query);
+  const api = useApi();
+  const [loading, setLoading] = useState(true)
+  const [movieList, setMovies] = useState([]);
+  const [showList, setShows] = useState([]);
+  const [gameList, setGames] = useState([]);
+  
+  useEffect(() => {
+    
+    const loadResults = async () => {
+      const resultData = await api.get(`/search/${query}/`);
+
+      setMovies(resultData.movies.results);
+      setShows(resultData.shows.resutls);
+      setGames(resultData.games.results);
+  
+      setLoading(false);
+    }
+    loadResults();
+  }, [query]);
 
   if (loading) {
     return null;
   }
-
-  
-  const movies = searchResults[0].movies.results;
-  const shows = searchResults[1].shows.results;
-  const games = searchResults[2].games.results;
-
   return (
     <div className="search-results">
       <div className="content" id="movies">
         <h3>Movies</h3>
         <div className="list">
-        {movies && 
-        movies.map((movie) => {
+        {movieList && 
+        movieList.map((movie) => {
           return (
             <div key={movie.id} className="items">
               <Link to={`/movie/${movie.id}/`}>
                   <div>
                     <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="Movie Poster" />
                     <div className="name">
-                    {movie.title}
+                      {movie.title}
                     </div>
                   </div>
                 </Link>
@@ -41,8 +53,8 @@ export const Search = () => {
       <div id="shows" className="content">
         <h3>Shows</h3>
         <div className="list">
-          {shows &&
-          shows.map((show, index) => {
+          {showList &&
+          showList.map((show, index) => {
             return (
               <div key={show.id} className='movies'>
                 <Link to={`/show/${show.id}/`}>
@@ -62,8 +74,8 @@ export const Search = () => {
       <div id="games" className="content">
         <h3>Video Games</h3>
         <div className="list">
-          {games && 
-          games.map((game, index) => {
+          {gameList && 
+          gameList.map((game, index) => {
             return (
               (index < 8 && 
                 <div key={game.id} className="movies">

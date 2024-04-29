@@ -80,7 +80,6 @@ def movie(req, id):
         response = requests.get(url)
 
         body = json.loads(response.text)
-        
         return JsonResponse({"movie": body, "saved": Movies.objects.filter(pk=id, user=req.user).exists()})
 
 @login_required
