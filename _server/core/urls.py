@@ -11,4 +11,5 @@ urlpatterns = [
   path('game/<int:id>/', view=views.game, name="game"),
   path('search/<str:query>/', view=views.search, name="search"),
   path('saved/', view=views.saved, name="saved"),
+  path('movies/', view=views.movie_page, name="movies"),
 ]

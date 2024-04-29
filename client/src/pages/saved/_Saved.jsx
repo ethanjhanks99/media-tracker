@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSaved } from "../../utils/saved";
+import { useSaved } from "../../utils/use_saved";
 
 export const Saved = () => {
   const [movieList, showList, gameList, username, loading] = useSaved();

@@ -169,6 +169,25 @@ def saved(req):
     games = [model_to_dict(game) for game in games]
     games = [{key: game[key] for key in game if key != 'user'} for game in games]
 
-    username = req.user.username.split("@")[0]
+    username = req.user.first_name
 
     return JsonResponse({"movies": movies, "shows": shows, "games": games, "username": username})
+
+@login_required
+def movie_page(req):
+    api_key = os.environ.get("TMDB_API_KEY")
+
+    now_playing_url = f"https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key={api_key}"
+    now_playing_res = requests.get(now_playing_url)
+    now_playing_bod = json.loads(now_playing_res.text)
+
+    upcoming_url = f"https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1&api_key={api_key}"
+    upcoming_res = requests.get(upcoming_url)
+    upcoming_bod = json.loads(upcoming_res.text)
+
+    popular_url = f"https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key={api_key}"
+    popular_res = requests.get(popular_url)
+    popular_bod = json.loads(popular_res.text)
+
+    return JsonResponse({"nowPlaying": now_playing_bod, "upcoming": upcoming_bod, "popular": popular_bod})
+
