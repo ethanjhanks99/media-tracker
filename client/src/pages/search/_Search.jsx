@@ -17,7 +17,7 @@ export const Search = () => {
       const resultData = await api.get(`/search/${query}/`);
 
       setMovies(resultData.movies.results);
-      setShows(resultData.shows.resutls);
+      setShows(resultData.shows.results);
       setGames(resultData.games.results);
   
       setLoading(false);

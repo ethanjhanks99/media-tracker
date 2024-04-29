@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export const SearchBar = () => {
   const [searchBar, setSearchBar] = useState("");
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
   
 
   const addQuery = (e) => {
@@ -20,13 +21,18 @@ export const SearchBar = () => {
     });
   }
 
+  const submitSearch = (e) => {
+    e.preventDefault();
+
+    setSearchBar("");
+    navigate(`/search/${query}`);
+  }
+
   return (
     <div className="search-bar">
-      <form>
+      <form onSubmit={submitSearch}>
         <input type="text" value={searchBar} onChange={addQuery} placeholder="Search" />
-        <Link to={"/search/" + query}>
         <button className="search">Search</button>
-        </Link>
       </form>
     </div>
   )
