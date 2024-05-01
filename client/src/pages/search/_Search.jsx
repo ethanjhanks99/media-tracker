@@ -30,7 +30,7 @@ export const Search = () => {
   }
   return (
     <div className="search-results">
-      <div className="content" id="movies">
+      <div className="content">
         <h3>Movies</h3>
         <div className="list">
         {movieList && 
@@ -39,7 +39,9 @@ export const Search = () => {
             <div key={movie.id} className="items">
               <Link to={`/movie/${movie.id}/`}>
                   <div>
-                    <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="Movie Poster" />
+                    <div className="image-wrapper">
+                      <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="Movie Poster" className="content-image"/>
+                    </div>
                     <div className="name">
                       {movie.title}
                     </div>
@@ -56,10 +58,12 @@ export const Search = () => {
           {showList &&
           showList.map((show, index) => {
             return (
-              <div key={show.id} className='movies'>
+              <div key={show.id} className='items'>
                 <Link to={`/show/${show.id}/`}>
                   <div>
-                    <img src={`https://image.tmdb.org/t/p/original${show.poster_path}`} alt="Show Poster" />
+                    <div className="image-wrapper">
+                      <img src={`https://image.tmdb.org/t/p/original${show.poster_path}`} alt="Show Poster" className="content-image"/>
+                    </div>
                     <div className="name">
                       {show.name}
                     </div>
@@ -78,10 +82,12 @@ export const Search = () => {
           gameList.map((game, index) => {
             return (
               (index < 8 && 
-                <div key={game.id} className="movies">
+                <div key={game.id} className="items">
                   <Link to={`/game/${game.id}/`}>
                     <div>
-                      <img src={game.background_image} alt="" />
+                      <div className="image-wrapper">
+                        <img src={game.background_image} alt="" className="content-image"/>
+                      </div>
                       <div className="name">
                         {game.name}
                       </div>
