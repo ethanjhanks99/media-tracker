@@ -1,27 +1,27 @@
 import { Link } from "react-router-dom";
-import { useShows } from "../../utils/use_show";
+import { useGames } from "../../utils/use_game";
 
-export const Shows = () => {
-  const [nowAiring, upcoming, popular, loading] = useShows();
+export const Games = () => {
+  const [newReleases, topSingle, topMulti, loading] = useGames();
 
   if (loading) return null;
 
   return (
     <>
       <div className="content">
-        <h3>New Episodes Airing</h3>
+        <h3>New Releases</h3>
         <div className="list">
-          {nowAiring && 
-          nowAiring.map((show) => {
+          {newReleases && 
+          newReleases.map((game) => {
             return (
-              <div key={show.id} className='items'>
-                <Link to={`/show/${show.id}/`}>
+              <div key={game.id} className='items'>
+                <Link to={`/game/${game.id}/`}>
                   <div>
                     <div className="image-wrapper">
-                      <img src={`https://image.tmdb.org/t/p/original${show.poster_path}`} alt="" className="content-image" />
+                      <img src={`${game.background_image}`} alt="" className="content-image" />
                     </div>
                     <div className="name">
-                      <strong>{show.name}</strong>
+                      <strong>{game.name}</strong>
                     </div>
                   </div>
                 </Link>
@@ -32,19 +32,19 @@ export const Shows = () => {
         </div>
       </div>
       <div className="content">
-        <h3>On Air</h3>
+        <h3>Top Singleplayer</h3>
         <div className="list">
-          {upcoming &&
-          upcoming.map((show) => {
+          {topSingle &&
+          topSingle.map((game) => {
             return (
-              <div key={show.id} className='items'>
-                <Link to={`/show/${show.id}/`}>
+              <div key={game.id} className='items'>
+                <Link to={`/game/${game.id}/`}>
                   <div>
                     <div className="image-wrapper">
-                      <img src={`https://image.tmdb.org/t/p/original${show.poster_path}`} alt="" className="content-image" />
+                      <img src={`${game.background_image}`} alt="" className="content-image" />
                     </div>
                     <div className="name">
-                      <strong>{show.name}</strong>
+                      <strong>{game.name}</strong>
                     </div>
                   </div>
                 </Link>
@@ -55,19 +55,19 @@ export const Shows = () => {
         </div>
       </div>
       <div className="content">
-        <h3>Top Rated</h3>
+        <h3>Top Multiplayer</h3>
         <div className="list">
-          {popular && 
-          popular.map((show) => {
+          {topMulti && 
+          topMulti.map((game) => {
             return ( 
-              <div key={show.id} className="items">
-                <Link to={`/show/${show.id}/`}>
+              <div key={game.id} className="items">
+                <Link to={`/game/${game.id}/`}>
                   <div>
                     <div className="image-wrapper">
-                      <img src={`https://image.tmdb.org/t/p/original${show.poster_path}`} alt="" className="content-image" />
+                      <img src={`${game.background_image}`} alt="" className="content-image" />
                     </div>
                     <div className="name">
-                      <strong>{show.name}</strong>
+                      <strong>{game.name}</strong>
                     </div>
                   </div>
                 </Link>

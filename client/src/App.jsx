@@ -24,6 +24,7 @@ function App() {
     {"name": "Home", "url": "/"},
     {"name": "Movies", "url": "/movies/"},
     {"name": "Shows", "url": "/shows/"},
+    {"name": "Games", "url": "/games/"},
     {"name": "My Saved", "url": "/user/"},
   ]
 

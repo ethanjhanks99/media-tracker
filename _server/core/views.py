@@ -208,3 +208,21 @@ def show_page(req):
     top_rated_bod = json.loads(top_rated_res.text)
 
     return JsonResponse({"nowAiring": now_airing_bod, "onAir": on_air_bod, "topRated": top_rated_bod})
+
+@login_required
+def game_page(req):
+    api_key = os.environ.get("RAWG_API_KEY")
+
+    new_releases_url = f"https://api.rawg.io/api/games?page=1&page_size=8&ordering=released&key={api_key}"
+    new_releases_res = requests.get(new_releases_url)
+    new_releases_bod = json.loads(new_releases_res.text)
+
+    top_single_url = f"https://api.rawg.io/api/games?page=1&page_size=8&tags=singleplayer&ordering=metacritic&key={api_key}"
+    top_single_res = requests.get(top_single_url)
+    top_single_bod = json.loads(top_single_res.text)
+
+    top_multi_url = f"https://api.rawg.io/api/games?page=1&page_size=8&tags=multiplayer&ordering=metacritic&key={api_key}"
+    top_multi_res = requests.get(top_multi_url)
+    top_multi_bod = json.loads(top_multi_res.text)
+
+    return JsonResponse({"newReleases": new_releases_bod, "topSingle": top_single_bod, "topMulti": top_multi_bod})

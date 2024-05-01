@@ -12,6 +12,7 @@ import { Game } from './pages/game/_Game.jsx'
 import { Saved } from './pages/saved/_Saved.jsx'
 import { Movies } from './pages/movie/_Movies.jsx'
 import { Shows } from './pages/show/_Shows.jsx'
+import { Games } from './pages/game/_Games.jsx'
 
 
 const router = createHashRouter([
@@ -50,6 +51,10 @@ const router = createHashRouter([
       {
         path: "/shows",
         element: <Shows />
+      },
+      {
+        path: "/games",
+        element: <Games />
       }
     ]
   }

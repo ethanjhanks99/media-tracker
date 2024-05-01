@@ -39,3 +39,27 @@ export const useGame = (id) => {
 
   return [game, saved, loading];
 }
+
+export const useGames = () => {
+  const api = useApi();
+  const [newReleases, setNewReleases] = useState([]);
+  const [topSingle, setTopSingle] = useState([]);
+  const [topMulti, setTopMulti] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const loadGameLists = async () => {
+    const gameData = await api.get('/games/');
+
+    setNewReleases(gameData.newReleases.results);
+    setTopSingle(gameData.topSingle.results);
+    setTopMulti(gameData.topMulti.results);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    loadGameLists();
+  }, []);
+
+  return [newReleases, topSingle, topMulti, loading];
+
+}

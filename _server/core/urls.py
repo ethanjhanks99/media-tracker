@@ -13,4 +13,5 @@ urlpatterns = [
   path('saved/', view=views.saved, name="saved"),
   path('movies/', view=views.movie_page, name="movies"),
   path('shows/', view=views.show_page, name="show-page"),
+  path('games/', view=views.game_page, name="game-page"),
 ]
