@@ -39,3 +39,27 @@ export const useShow = (id) => {
   return [show, saved, loading];
 
 }
+
+export const useShows = () => {
+  const api = useApi();
+  const [nowAiring, setNowAiring] = useState([]);
+  const [onAir, setOnAir] = useState([]);
+  const [topRated, setTopRated] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const loadShowLists = async () => {
+    const showData = await api.get('/shows/');
+
+    setNowAiring(showData.nowAiring.results);
+    setOnAir(showData.onAir.results);
+    setTopRated(showData.topRated.results);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    loadShowLists();
+  }, []);
+
+  return [nowAiring, onAir, topRated, loading];
+
+}

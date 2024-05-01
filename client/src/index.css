@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  width: 100vw;
 }
 
 button {
@@ -11,11 +12,29 @@ button {
   height: fit-content;
 }
 
-img {
-  max-width: 175px;
+a {
+  text-decoration: none;
 }
 
-.name {max-width: 175px;}
+.content-image {
+  width: 175px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  height: 275px;
+}
+
+.image-wrapper {
+  height: 275px;
+}
+
+.name {
+  max-width: 175px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: black;
+}
 
 .content {
   display: flex;
@@ -25,21 +44,26 @@ img {
   border-radius: 16px;
   padding: 8px;
   align-items: baseline;
-  width: 100%;
+  width: inherit;
 }
 
 .everything-else {
-  width: fit-content;
+  width: 75em;
 }
 
 .list {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  width: inherit;
+  justify-content: center;
 }
 
 .items {
   display: flex;
+  border: 1px solid black;
+  border-radius: 8px;
+  height: fit-content;
 }
 
 .top-bar {

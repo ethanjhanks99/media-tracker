@@ -18,9 +18,11 @@ export const Movies = () => {
               <div key={movie.id} className='items'>
                 <Link to={`/movie/${movie.id}/`}>
                   <div>
-                    <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="Movie Poster" />
+                    <div className="image-wrapper">
+                      <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className="content-image" />
+                    </div>
                     <div className="name">
-                    {movie.title}
+                      <strong>{movie.title}</strong>
                     </div>
                   </div>
                 </Link>
@@ -39,9 +41,11 @@ export const Movies = () => {
               <div key={movie.id} className='items'>
                 <Link to={`/movie/${movie.id}/`}>
                   <div>
-                    <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="movie Poster" />
+                    <div className="image-wrapper">
+                      <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className="content-image" />
+                    </div>
                     <div className="name">
-                      {movie.title}
+                      <strong>{movie.title}</strong>
                     </div>
                   </div>
                 </Link>
@@ -60,9 +64,11 @@ export const Movies = () => {
                 <div key={movie.id} className="items">
                   <Link to={`/movie/${movie.id}/`}>
                     <div>
-                      <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="" />
+                      <div className="image-wrapper">
+                        <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="" className="content-image" />
+                      </div>
                       <div className="name">
-                        {movie.title}
+                        <strong>{movie.title}</strong>
                       </div>
                     </div>
                   </Link>

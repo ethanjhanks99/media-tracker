@@ -191,3 +191,20 @@ def movie_page(req):
 
     return JsonResponse({"nowPlaying": now_playing_bod, "upcoming": upcoming_bod, "popular": popular_bod})
 
+@login_required
+def show_page(req):
+    api_key = os.environ.get("TMDB_API_KEY")
+
+    now_airing_url = f"https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1&api_key={api_key}"
+    now_airing_res = requests.get(now_airing_url)
+    now_airing_bod = json.loads(now_airing_res.text)
+
+    on_air_url = f"https://api.themoviedb.org/3/tv/on_the_air?language=en-US&page=1&api_key={api_key}"
+    on_air_res = requests.get(on_air_url)
+    on_air_bod = json.loads(on_air_res.text)
+
+    top_rated_url = f"https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1&api_key={api_key}"
+    top_rated_res = requests.get(top_rated_url)
+    top_rated_bod = json.loads(top_rated_res.text)
+
+    return JsonResponse({"nowAiring": now_airing_bod, "onAir": on_air_bod, "topRated": top_rated_bod})

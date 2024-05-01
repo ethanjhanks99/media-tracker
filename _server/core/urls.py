@@ -12,4 +12,5 @@ urlpatterns = [
   path('search/<str:query>/', view=views.search, name="search"),
   path('saved/', view=views.saved, name="saved"),
   path('movies/', view=views.movie_page, name="movies"),
+  path('shows/', view=views.show_page, name="show-page"),
 ]

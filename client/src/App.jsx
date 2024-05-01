@@ -23,8 +23,8 @@ function App() {
   const pages = [
     {"name": "Home", "url": "/"},
     {"name": "Movies", "url": "/movies/"},
+    {"name": "Shows", "url": "/shows/"},
     {"name": "My Saved", "url": "/user/"},
-    
   ]
 
   return (
