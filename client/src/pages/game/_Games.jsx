@@ -8,6 +8,7 @@ export const Games = () => {
 
   return (
     <>
+      <h1>Video Games</h1>
       <div className="content">
         <h3>New Releases</h3>
         <div className="list">
@@ -18,7 +19,7 @@ export const Games = () => {
                 <Link to={`/game/${game.id}/`}>
                   <div>
                     <div className="image-wrapper">
-                      <img src={`${game.background_image}`} alt="" className="content-image" />
+                      <img src={game.background_image} alt="" className="content-image" />
                     </div>
                     <div className="name">
                       <strong>{game.name}</strong>
@@ -41,7 +42,7 @@ export const Games = () => {
                 <Link to={`/game/${game.id}/`}>
                   <div>
                     <div className="image-wrapper">
-                      <img src={`${game.background_image}`} alt="" className="content-image" />
+                      <img src={game.background_image} alt="" className="content-image" />
                     </div>
                     <div className="name">
                       <strong>{game.name}</strong>
@@ -64,7 +65,7 @@ export const Games = () => {
                 <Link to={`/game/${game.id}/`}>
                   <div>
                     <div className="image-wrapper">
-                      <img src={`${game.background_image}`} alt="" className="content-image" />
+                      <img src={game.background_image} alt="" className="content-image" />
                     </div>
                     <div className="name">
                       <strong>{game.name}</strong>

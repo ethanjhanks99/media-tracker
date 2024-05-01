@@ -12,18 +12,21 @@ export const Home = () => {
 
   return (
     <>
+      <h1>Home</h1>
       <div id="movies" className="content">
         <h3>Movies</h3>
         <div className="list">
-          {movieList && 
-          movieList.map((movie, index) => {
+          {
+          movieList.map((movie) => {
             return (
               <div key={movie.id} className='items'>
                 <Link to={`/movie/${movie.id}/`}>
                   <div>
-                    <img src={"https://image.tmdb.org/t/p/original" + movie.poster_path} alt="Movie Poster" />
+                    <div className="image-wrapper">
+                      <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="Movie Poster" className="content-image" />
+                    </div>
                     <div className="name">
-                    {movie.title}
+                      <strong>{movie.title}</strong>
                     </div>
                   </div>
                 </Link>
@@ -36,15 +39,17 @@ export const Home = () => {
       <div id="shows" className="content">
         <h3>Shows</h3>
         <div className="list">
-          {showList &&
-          showList.map((show, index) => {
+          {
+          showList.map((show) => {
             return (
               <div key={show.id} className='items'>
                 <Link to={`/show/${show.id}/`}>
                   <div>
-                    <img src={"https://image.tmdb.org/t/p/original" + show.poster_path} alt="Show Poster" />
+                    <div className="image-wrapper">
+                      <img src={`https://image.tmdb.org/t/p/original${show.poster_path}`} alt="Show Poster" className="content-image" />
+                    </div>
                     <div className="name">
-                      {show.name}
+                      <strong>{show.name}</strong>
                     </div>
                   </div>
                 </Link>
@@ -57,16 +62,18 @@ export const Home = () => {
       <div id="games" className="content">
         <h3>Video Games</h3>
         <div className="list">
-          {gameList && 
+          {
           gameList.map((game, index) => {
             return (
               (index < 8 && 
                 <div key={game.id} className="items">
                   <Link to={`/game/${game.id}/`}>
                     <div>
-                      <img src={game.background_image} alt="" />
+                      <div className="image-wrapper">
+                        <img src={game.background_image} alt="" className="content-image" />
+                      </div>
                       <div className="name">
-                        {game.name}
+                        <strong>{game.name}</strong>
                       </div>
                     </div>
                   </Link>

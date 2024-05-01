@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 export const SearchBar = () => {
   const [searchBar, setSearchBar] = useState("");
   const [query, setQuery] = useState("");
@@ -29,10 +28,10 @@ export const SearchBar = () => {
   }
 
   return (
-    <div className="search-bar">
+    <div>
       <form onSubmit={submitSearch}>
-        <input type="text" value={searchBar} onChange={addQuery} placeholder="Search" />
-        <button className="search">Search</button>
+        <input type="text" value={searchBar} onChange={addQuery} placeholder="Search" className="search-bar" />
+        <button className="search-button">Search</button>
       </form>
     </div>
   )

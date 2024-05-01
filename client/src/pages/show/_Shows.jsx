@@ -8,6 +8,7 @@ export const Shows = () => {
 
   return (
     <>
+      <h1>Shows</h1>
       <div className="content">
         <h3>New Episodes Airing</h3>
         <div className="list">

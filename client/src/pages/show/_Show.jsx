@@ -35,12 +35,49 @@ export const Show = () => {
 
   return (
     <>
-      <h3>{showData.name}</h3>
-      <div>
-        <img src={`https://image.tmdb.org/t/p/original${showData.poster_path}`} alt="Show Poster" />
+      <div className="media-name">
+        <h1>{showData.name}</h1>
       </div>
-      {!saved && <button onClick={save}>Save Show</button>}
-      {saved && <button onClick={unsave}>Unsave</button>}
+      <div className="media-info">
+        <div>
+          <img src={`https://image.tmdb.org/t/p/original${showData.poster_path}`} alt="Show Poster" className="page-image"/>
+          {!saved && <button onClick={save}>Save</button>}
+          {saved && <button onClick={unsave}>Unsave</button>}
+        </div>
+        <div className="information">
+          <div className="overview">
+            <h3>Overview</h3>
+            {showData.overview}
+          </div>
+          <div className="genre">
+            <h3>Genres</h3>
+            {showData.genres.map((genre) => {
+              return (
+                <span key={genre.id} className="text">{genre.name}</span>
+                )
+              })}
+          </div>
+          <div>
+            <h3>Number of Seasons/Episodes</h3>
+            <span className="text">
+              {showData.number_of_seasons}/{showData.number_of_episospan}
+            </span>
+          </div>
+          <div className="production">
+            <h3>Production Companies</h3>
+            {showData.production_companies.map((company) => {
+              return (
+                <div key={company.id}>
+                  <span className="text">
+                  {company.name}
+                  </span>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+      
     </>
   )
 

@@ -9,19 +9,21 @@ export const Saved = () => {
 
   return (
     <>
-      <h1>{username}</h1>
+      <h1>{username}'s Saved Media</h1>
       <div id="movies" className="content">
         <h3>Movies</h3>
         <div className="list">
           { 
-          movieList.map((movie, index) => {
+          movieList.map((movie) => {
             return (
               <div key={movie.id} className='items'>
                 <Link to={`/movie/${movie.id}/`}>
                   <div>
-                    <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="Movie Poster" />
+                    <div className="image-wrapper">
+                      <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="Movie Poster" className="content-image" />
+                    </div>
                     <div className="name">
-                    {movie.title}
+                      <strong>{movie.title}</strong>
                     </div>
                   </div>
                 </Link>
@@ -35,14 +37,16 @@ export const Saved = () => {
         <h3>Shows</h3>
         <div className="list">
           {
-          showList.map((show, index) => {
+          showList.map((show) => {
             return (
               <div key={show.id} className='items'>
                 <Link to={`/show/${show.id}/`}>
                   <div>
-                    <img src={`https://image.tmdb.org/t/p/original${show.poster_path}`} alt="Show Poster" />
+                    <div className="image-wrapper">
+                      <img src={`https://image.tmdb.org/t/p/original${show.poster_path}`} alt="Show Poster" className="content-image" />
+                    </div>
                     <div className="name">
-                      {show.title}
+                      <strong>{show.name}</strong>
                     </div>
                   </div>
                 </Link>
@@ -62,15 +66,17 @@ export const Saved = () => {
                 <div key={game.id} className="items">
                   <Link to={`/game/${game.id}/`}>
                     <div>
-                      <img src={game.poster_path} alt="" />
+                      <div className="image-wrapper">
+                        <img src={game.poster_path} alt="" className="content-image" />
+                      </div>
                       <div className="name">
-                        {game.title}
+                        <strong>{game.name}</strong>
                       </div>
                     </div>
                   </Link>
                 </div>)
-            );
-          })
+              );
+            })
           }
         </div>
       </div>
